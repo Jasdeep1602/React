@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Cards({ data /*helloelement*/ }) {
+export default function Cards({ data }) {
   return (
     <>
       <div className='cards'>
@@ -12,9 +12,9 @@ export default function Cards({ data /*helloelement*/ }) {
             <p>Price: {data.price}</p>
             <p>Rating: {data.rating}</p>
           </div>
+          <button onClick={() => addToCart(data)}>{data.id}</button>
         </div>
       </div>
-      {/* {helloelement} */}
     </>
   )
 }
