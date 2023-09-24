@@ -7,6 +7,10 @@
   color: rgb(90, 84, 84);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 ul {
   list-style: none;
   display: flex;
@@ -15,20 +19,29 @@ ul {
 
 .header {
   width: 100%;
-  box-shadow: 0.1px 5px 5px 1px whitesmoke;
-  background: white;
   z-index: 1;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.2rem;
+  background: rgba(
+    255,
+    249,
+    249,
+    0.805
+  ); /* Transparent white background color */
+  text-align: center;
+  backdrop-filter: blur(2px); /* Apply a blur effect to the background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Add a border for contrast */
+  color: #fff; /* Text color for better visibility */
 }
 
 .logo {
-  width: 90px;
+  width: 140px;
   height: 90px;
+  cursor: pointer;
 }
 
 .navbar {
@@ -45,24 +58,54 @@ ul {
 li {
   font-size: 1.1em;
   cursor: pointer;
+  transition: transform 0.2s;
 }
 
 li:hover {
   color: rgb(206, 40, 40);
+  transform: scale(0.9);
 }
-.calls {
+.calls,
+.shimmer-calls {
+  justify-content: center;
   display: flex;
   flex-direction: column;
   flex-flow: row wrap;
-  padding-top: 8rem;
-  background: rgb(250, 243, 240);
+  width: 95vw;
+
+  background: rgb(255, 251, 250);
 }
 
 .cards {
   display: flex;
-  width: 500px;
+  width: 340px;
   flex-direction: column;
-  padding: 2rem;
+  cursor: pointer;
+  padding: 1rem;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  transition: transform 0.3s;
+}
+
+.shimmer-cards {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4%;
+  margin-bottom: 30px;
+  padding: 1rem;
+  margin-right: 50px;
+  width: 280px;
+  height: 230px;
+  background: rgb(243, 243, 243);
+}
+
+.cards:hover {
+  transform: scale(0.9);
+}
+
+.filter {
+  margin-left: 3rem;
+  margin-top: 7rem;
 }
 
 .food-image {

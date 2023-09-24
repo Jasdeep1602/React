@@ -5,13 +5,30 @@ import Shimmer from './Shimmer'
 
 export default function Cards() {
   const [data, setData] = useState([])
-  const [datatwo, setDataTwo] = useState([])
-  // const filterData = () => {
-  //   const filterResponse = data.filter((data) => data.rating > 4.3)
-  //   console.log('filterResponse::::', filterResponse)
-  //   setData(filterResponse)
-  // }
+  const [filterRestaurant, setFilterRestaurant] = useState([])
+  const [searchText, setSearchText] = useState([])
 
+  const filterData = () => {
+    const filterResponse = data.map((index) => {
+      return index.filter((data) => data.info.avgRating > 4.3)
+    })
+
+    setData(filterResponse)
+    console.log('filterResponse::::', filterResponse)
+    return filterResponse
+  }
+
+  const filterSearch = () => {
+    const filterSearchResponse = data.map((index) => {
+      return index.filter((data) =>
+        data.info.name.toLowerCase().includes(searchText.toLowerCase())
+      )
+    })
+    console.log(searchText)
+    setFilterRestaurant(filterSearchResponse)
+    console.log('filterSerachResponse::::', filterSearchResponse)
+    return filterSearchResponse
+  }
   useEffect(() => {
     axios
       .get(
@@ -19,28 +36,56 @@ export default function Cards() {
       )
       .then((res) => {
         console.log('getting data....', res)
-        setData(
-          res.data.data.cards[2].card.card.gridElements.infoWithStyle
-            .restaurants
-        )
-        setDataTwo(
-          res.data.data.cards[5].card.card.gridElements.infoWithStyle
-            .restaurants
-        )
+        setData([
+          res?.data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants,
+          res?.data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants,
+          res?.data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants,
+          res?.data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants,
+        ])
+        setFilterRestaurant([
+          res?.data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants,
+          res?.data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants,
+          res?.data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants,
+          res?.data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants,
+        ])
       })
       .catch((err) => console.log(err))
   }, [])
 
-  return (
-    <div className='calls'>
-      {console.log(data)}
-      {console.log(datatwo)}
-      {data.map((data, key) => {
-        return <Cards key={key} data={data} />
-      })}
-      {datatwo.map((data, key) => {
-        return <Cards key={key} data={data} />
-      })}
-    </div>
+  return data.length === 0 ? (
+    <>
+      {console.log('hello')}
+      <Shimmer />
+    </>
+  ) : (
+    <>
+      <input
+        type='text'
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+
+      <button onClick={filterSearch}>Search</button>
+      <button className='filter' onClick={filterData}>
+        Filter
+      </button>
+      <div className='calls'>
+        {console.log(data)}
+
+        {filterRestaurant.map((index) => {
+          return index.map((data, key) => {
+            return <Cards key={key} data={data} />
+          })
+        })}
+      </div>
+    </>
   )
 }

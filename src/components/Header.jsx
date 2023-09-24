@@ -6,7 +6,7 @@ export default function Header() {
       <div>
         <img
           className='logo'
-          src='https://i.pinimg.com/originals/82/be/d4/82bed479344270067e3d2171379949b3.png'
+          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGETzMKxVh4NoO4_b8512HKGnn0Fnumefxmg&usqp=CAU'
           alt='logo'
         />
       </div>
